@@ -3,6 +3,8 @@ import { analyzeChange } from "../api";
 import RiskGauge from "../components/RiskGauge";
 import BlastRadiusList from "../components/BlastRadiusList";
 import Section from "../components/Section";
+import RiskBreakdown from "../components/RiskBreakdown";
+
 
 export default function Dashboard() {
   const [result, setResult] = useState(null);
@@ -30,6 +32,10 @@ export default function Dashboard() {
         <>
           <Section title="Risk Overview">
             <RiskGauge score={result.riskScore} />
+          </Section>
+          
+          <Section title="Risk Explanation">
+            <RiskBreakdown factors={result.riskFactors} />
           </Section>
 
           <Section title="Affected Services">
