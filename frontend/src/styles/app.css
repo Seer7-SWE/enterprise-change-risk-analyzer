@@ -149,3 +149,21 @@ h1 {
   background: #0f1622;
   margin: 16px 0;
 }
+
+.advisory-box {
+  border-left: 4px solid #f59e0b;
+  /* background: #fff7ed; */
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+}
+
+.advisory-box h3 {
+  margin-bottom: 6px;
+  color: #92400e;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #6b7280;
+}

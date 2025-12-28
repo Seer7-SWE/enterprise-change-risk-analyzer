@@ -5,7 +5,7 @@ import BlastRadiusList from "../components/BlastRadiusList";
 import Section from "../components/Section";
 import RiskBreakdown from "../components/RiskBreakdown";
 import DependencyGraph from "../components/DependencyGraph";
-
+import AdvisoryPanel from "../components/AdvisoryPanel";
 
 
 export default function Dashboard() {
@@ -28,7 +28,11 @@ export default function Dashboard() {
         <button className="primary-btn" onClick={analyze}>
           {loading ? "Analyzing change..." : "Analyze Change"}
         </button>
+      
       </header>
+        {result?.advisories && (
+            <AdvisoryPanel advisories={result.advisories} />
+        )}
 
       {result && (
         <>
