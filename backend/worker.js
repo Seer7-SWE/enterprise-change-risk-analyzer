@@ -29,24 +29,64 @@ export default {
 
     // --- Analyze API ---
     if (method === "POST" && url.pathname === "/analyze") {
-      try {
-        const body = await request.json();
+     try {
+         const body = await request.json();
 
-        
-        return new Response(
+         // Defensive defaults (IMPORTANT)
+        const service = body.service || "auth-service";
+
+        // MOCK dependency graph (until Firebase logic is stable)
+        const dependencyGraph = {
+          "auth-service": ["oracle-db", "ldap"],
+          "oracle-db": ["storage"],
+          "ldap": [],
+          "storage": []
+        };
+
+       const blastRadius = dependencyGraph[service] || [];
+
+         return new Response(
           JSON.stringify({
-            riskScore: 72,
-            blastRadius: ["oracle-db", "ldap", "storage"]
-          }),
-          { headers: corsHeaders }
-        );
-      } catch {
-        return new Response(
-          JSON.stringify({ error: "Invalid JSON" }),
-          { status: 400, headers: corsHeaders }
-        );
-      }
-    }
+           riskScore: 72,
+           blastRadius,
+           dependencyGraph,
+           riskFactors: [
+           {
+             title: "Critical Service Impacted",
+             impact: "+25",
+             reason:
+              "The selected service supports authentication for multiple downstream systems."
+           },
+           {
+             title: "Peak Traffic Window",
+             impact: "+20",
+             reason:
+              "The change is scheduled during high user activity hours."
+           },
+           {
+             title: "Multiple Downstream Dependencies",
+             impact: "+18",
+             reason:
+              "Failure may cascade to database, directory, and storage services."
+           },
+           {
+             title: "Rollback Plan Missing",
+             impact: "+9",
+             reason:
+              "No rollback strategy was provided for this change."
+           }
+         ]
+       }),
+       { headers: corsHeaders }
+     );
+    } catch (err) {
+     return new Response(
+       JSON.stringify({ error: "Invalid analyze payload" }),
+       { status: 400, headers: corsHeaders }
+     );
+   }
+ }
+
 
     
     return new Response(

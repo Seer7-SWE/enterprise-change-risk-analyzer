@@ -4,6 +4,8 @@ import RiskGauge from "../components/RiskGauge";
 import BlastRadiusList from "../components/BlastRadiusList";
 import Section from "../components/Section";
 import RiskBreakdown from "../components/RiskBreakdown";
+import DependencyGraph from "../components/DependencyGraph";
+
 
 
 export default function Dashboard() {
@@ -41,6 +43,14 @@ export default function Dashboard() {
           <Section title="Affected Services">
             <BlastRadiusList services={result.blastRadius} />
           </Section>
+           
+           <Section title="Dependency Graph">
+            <DependencyGraph
+              graph={result.dependencyGraph}
+              blastRadius={result.blastRadius}
+            />
+           </Section>
+
         </>
       )}
     </div>
