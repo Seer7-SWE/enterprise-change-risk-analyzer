@@ -167,3 +167,29 @@ h1 {
   font-size: 0.9rem;
   color: #6b7280;
 }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.approve {
+  background: #16a34a;
+  color: white;
+}
+
+.reject {
+  background: #dc2626;
+  color: white;
+}
+
+.danger {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.safe {
+  color: #16a34a;
+  font-weight: 600;
+}

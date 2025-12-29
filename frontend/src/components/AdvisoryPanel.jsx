@@ -16,7 +16,7 @@ export default function AdvisoryPanel({ advisories }) {
           This change requires CAB approval due to high operational risk.
         </p>
       </div>
-
+      <br></br>
       {/* Jira */}
       <div className="advisory-box">
         <h3>Jira Risk Mitigation Task</h3>
